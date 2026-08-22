@@ -1,0 +1,291 @@
+{
+  "type": "processing",
+  "version": "1",
+  "name": "everpix",
+  "process": {
+    "format_dates": {
+      "op": "format",
+      "options": {
+        "dateTag": "uatu:date",
+        "dateFormat": "YYYY-MM-DD",
+        "numberTag": "uatu:measure"
+      }
+    },
+    "clear": {
+      "op": "clear",
+      "require": [
+        "format_dates"
+      ]
+    },
+    "globalfilter": {
+      "op": "globalfilter",
+      "require": [
+        "clear"
+      ]
+    },
+    "localfilter": {
+      "op": "localfilter",
+      "require": [
+        "globalfilter"
+      ]
+    },
+    "pre_agg_enhance": {
+      "op": "enhance",
+      "require": [
+        "localfilter"
+      ],
+      "options": {
+        "nullSafe": true,
+        "columns": [
+          {
+            "column": "everpix:calc:margin_accrual",
+            "calculate": "expr",
+            "expr": [
+              "-",
+              "everpix:recognized_revenue",
+              "everpix:aws_cost"
+            ]
+          },
+          {
+            "column": "everpix:calc:margin_cash",
+            "calculate": "expr",
+            "expr": [
+              "-",
+              "everpix:cash_sales",
+              "everpix:aws_cost"
+            ]
+          },
+          {
+            "column": "everpix:calc:deferred",
+            "calculate": "expr",
+            "expr": [
+              "-",
+              "everpix:cash_sales",
+              "everpix:recognized_revenue"
+            ]
+          }
+        ]
+      }
+    },
+    "date_agg": {
+      "op": "aggregate",
+      "require": [
+        "pre_agg_enhance"
+      ],
+      "options": {
+        "groupby": [
+          "uatu:date"
+        ]
+      }
+    },
+    "enhance": {
+      "op": "enhance",
+      "require": [
+        "date_agg"
+      ],
+      "options": {
+        "cumulateOn": [
+          "uatu:date"
+        ],
+        "columns": [
+          {
+            "column": "everpix:calc:cum_recognized",
+            "calculate": "func",
+            "func": "cumsum",
+            "on": [
+              "everpix:recognized_revenue:sum"
+            ]
+          },
+          {
+            "column": "everpix:calc:cum_aws",
+            "calculate": "func",
+            "func": "cumsum",
+            "on": [
+              "everpix:aws_cost:sum"
+            ]
+          },
+          {
+            "column": "everpix:calc:cum_margin",
+            "calculate": "func",
+            "func": "cumsum",
+            "on": [
+              "everpix:calc:margin_accrual:sum"
+            ]
+          },
+          {
+            "column": "everpix:calc:cum_deferred",
+            "calculate": "func",
+            "func": "cumsum",
+            "on": [
+              "everpix:calc:deferred:sum"
+            ]
+          }
+        ]
+      }
+    },
+    "longtable": {
+      "op": "clear",
+      "require": [
+        "enhance"
+      ]
+    },
+    "longgraph": {
+      "op": "clear",
+      "require": [
+        "enhance"
+      ]
+    },
+    "longmap": {
+      "op": "clear",
+      "require": [
+        "enhance"
+      ]
+    },
+    "pointtable": {
+      "op": "clear",
+      "require": [
+        "enhance"
+      ]
+    },
+    "pointgraph": {
+      "op": "clear",
+      "require": [
+        "enhance"
+      ]
+    },
+    "pointmap": {
+      "op": "clear",
+      "require": [
+        "enhance"
+      ]
+    },
+    "conf_basegraph": {
+      "op": "noop",
+      "options": {
+        "prefixes": [
+          "baseA",
+          "baseB"
+        ],
+        "startingDynamicMeasure": "everpix:recognized_revenue:sum",
+        "startingFixedMeasure": "everpix:aws_cost:sum"
+      }
+    },
+    "conf_longgraph": {
+      "op": "noop",
+      "options": {
+        "name": "",
+        "prefixes": [
+          "longA",
+          "longB"
+        ],
+        "revenue": "everpix:calc:cum_recognized",
+        "rows": []
+      }
+    },
+    "conf_pointgraph": {
+      "op": "noop",
+      "options": {
+        "name": "",
+        "prefixes": [
+          "pointA",
+          "pointB"
+        ],
+        "revenue": "everpix:calc:cum_recognized",
+        "rows": []
+      }
+    },
+    "conf_longtable": {
+      "op": "noop",
+      "options": {
+        "columnDefs": [
+          {
+            "headerName": "Month",
+            "sortable": true,
+            "field": "uatu:date",
+            "formatter": "date"
+          },
+          {
+            "headerName": "Recognized revenue",
+            "field": "everpix:recognized_revenue:sum"
+          },
+          {
+            "headerName": "Cash sales",
+            "field": "everpix:cash_sales:sum"
+          },
+          {
+            "headerName": "AWS cost",
+            "field": "everpix:aws_cost:sum"
+          },
+          {
+            "headerName": "Margin (accrual)",
+            "field": "everpix:calc:margin_accrual:sum"
+          },
+          {
+            "headerName": "Margin (cash)",
+            "field": "everpix:calc:margin_cash:sum"
+          },
+          {
+            "headerName": "Deferred revenue",
+            "field": "everpix:calc:cum_deferred"
+          },
+          {
+            "headerName": "Users",
+            "field": "everpix:users:last",
+            "formatter": "floatamount"
+          },
+          {
+            "headerName": "Subscribers",
+            "field": "everpix:subscribers:last",
+            "formatter": "floatamount"
+          },
+          {
+            "headerName": "Storage TiB",
+            "field": "everpix:storage_tib:last",
+            "formatter": "floatamount"
+          }
+        ]
+      }
+    },
+    "conf_pointtable": {
+      "op": "noop",
+      "options": {
+        "columnDefs": [
+          {
+            "headerName": "Month",
+            "sortable": true,
+            "field": "uatu:date",
+            "formatter": "date"
+          },
+          {
+            "headerName": "New users",
+            "field": "everpix:new_users:sum",
+            "formatter": "floatamount"
+          },
+          {
+            "headerName": "New photos (M)",
+            "field": "everpix:new_photos:sum",
+            "formatter": "floatamount"
+          },
+          {
+            "headerName": "Website visits",
+            "field": "everpix:visits:sum",
+            "formatter": "floatamount"
+          },
+          {
+            "headerName": "Press articles",
+            "field": "everpix:press:sum",
+            "formatter": "floatamount"
+          },
+          {
+            "headerName": "Subscription rate",
+            "field": "everpix:sub_rate:avg"
+          },
+          {
+            "headerName": "Free active 30d",
+            "field": "everpix:free_active:avg"
+          }
+        ]
+      }
+    }
+  }
+}

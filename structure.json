@@ -1,0 +1,501 @@
+{
+  "type": "structure",
+  "version": "1",
+  "name": "everpix",
+  "columns": [
+    {
+      "column": "id",
+      "type": "int",
+      "multi": false,
+      "required": true,
+      "tags": [
+        "uatu:id"
+      ]
+    },
+    {
+      "column": "uatu:date",
+      "type": "date",
+      "multi": false,
+      "required": true,
+      "tags": [
+        "sbi:i:mappable",
+        "uatu:date",
+        "gcx:date",
+        "uatu:timedimension",
+        "uatu:dimension:time"
+      ]
+    },
+    {
+      "column": "everpix:cash_sales",
+      "type": "number:currency",
+      "tags": [
+        "sbi:i:mappable",
+        "uatu:measure",
+        "uatu:aggregable"
+      ],
+      "aggregation": [
+        {
+          "type": "sum",
+          "target": "everpix:cash_sales:sum"
+        }
+      ]
+    },
+    {
+      "column": "everpix:cash_sales:sum",
+      "type": "number:currency",
+      "tags": [
+        "uatu:measure",
+        "uatu:aggregate",
+        "uatu:aggregate:long",
+        "uatu:aggregate:point"
+      ]
+    },
+    {
+      "column": "everpix:recognized_revenue",
+      "type": "number:currency",
+      "tags": [
+        "sbi:i:mappable",
+        "uatu:measure",
+        "uatu:aggregable"
+      ],
+      "aggregation": [
+        {
+          "type": "sum",
+          "target": "everpix:recognized_revenue:sum"
+        }
+      ]
+    },
+    {
+      "column": "everpix:recognized_revenue:sum",
+      "type": "number:currency",
+      "tags": [
+        "uatu:measure",
+        "uatu:aggregate",
+        "uatu:aggregate:long",
+        "uatu:aggregate:point"
+      ]
+    },
+    {
+      "column": "everpix:aws_cost",
+      "type": "number:currency",
+      "tags": [
+        "sbi:i:mappable",
+        "uatu:measure",
+        "uatu:aggregable"
+      ],
+      "aggregation": [
+        {
+          "type": "sum",
+          "target": "everpix:aws_cost:sum"
+        }
+      ]
+    },
+    {
+      "column": "everpix:aws_cost:sum",
+      "type": "number:currency",
+      "tags": [
+        "uatu:measure",
+        "uatu:aggregate",
+        "uatu:aggregate:long",
+        "uatu:aggregate:point"
+      ]
+    },
+    {
+      "column": "everpix:new_users",
+      "type": "number",
+      "tags": [
+        "sbi:i:mappable",
+        "uatu:measure",
+        "uatu:aggregable"
+      ],
+      "aggregation": [
+        {
+          "type": "sum",
+          "target": "everpix:new_users:sum"
+        }
+      ]
+    },
+    {
+      "column": "everpix:new_users:sum",
+      "type": "number",
+      "tags": [
+        "uatu:measure",
+        "uatu:aggregate",
+        "uatu:aggregate:long",
+        "uatu:aggregate:point"
+      ]
+    },
+    {
+      "column": "everpix:new_photos",
+      "type": "number",
+      "tags": [
+        "sbi:i:mappable",
+        "uatu:measure",
+        "uatu:aggregable"
+      ],
+      "aggregation": [
+        {
+          "type": "sum",
+          "target": "everpix:new_photos:sum"
+        }
+      ]
+    },
+    {
+      "column": "everpix:new_photos:sum",
+      "type": "number",
+      "tags": [
+        "uatu:measure",
+        "uatu:aggregate",
+        "uatu:aggregate:long",
+        "uatu:aggregate:point"
+      ]
+    },
+    {
+      "column": "everpix:visits",
+      "type": "number",
+      "tags": [
+        "sbi:i:mappable",
+        "uatu:measure",
+        "uatu:aggregable"
+      ],
+      "aggregation": [
+        {
+          "type": "sum",
+          "target": "everpix:visits:sum"
+        }
+      ]
+    },
+    {
+      "column": "everpix:visits:sum",
+      "type": "number",
+      "tags": [
+        "uatu:measure",
+        "uatu:aggregate",
+        "uatu:aggregate:long",
+        "uatu:aggregate:point"
+      ]
+    },
+    {
+      "column": "everpix:press",
+      "type": "number",
+      "tags": [
+        "sbi:i:mappable",
+        "uatu:measure",
+        "uatu:aggregable"
+      ],
+      "aggregation": [
+        {
+          "type": "sum",
+          "target": "everpix:press:sum"
+        }
+      ]
+    },
+    {
+      "column": "everpix:press:sum",
+      "type": "number",
+      "tags": [
+        "uatu:measure",
+        "uatu:aggregate",
+        "uatu:aggregate:long",
+        "uatu:aggregate:point"
+      ]
+    },
+    {
+      "column": "everpix:users",
+      "type": "number",
+      "tags": [
+        "sbi:i:mappable",
+        "uatu:measure",
+        "uatu:aggregable"
+      ],
+      "aggregation": [
+        {
+          "type": "last",
+          "target": "everpix:users:last"
+        }
+      ]
+    },
+    {
+      "column": "everpix:users:last",
+      "type": "number",
+      "tags": [
+        "uatu:measure",
+        "uatu:aggregate",
+        "uatu:aggregate:long",
+        "uatu:aggregate:point"
+      ]
+    },
+    {
+      "column": "everpix:subscribers",
+      "type": "number",
+      "tags": [
+        "sbi:i:mappable",
+        "uatu:measure",
+        "uatu:aggregable"
+      ],
+      "aggregation": [
+        {
+          "type": "last",
+          "target": "everpix:subscribers:last"
+        }
+      ]
+    },
+    {
+      "column": "everpix:subscribers:last",
+      "type": "number",
+      "tags": [
+        "uatu:measure",
+        "uatu:aggregate",
+        "uatu:aggregate:long",
+        "uatu:aggregate:point"
+      ]
+    },
+    {
+      "column": "everpix:storage_tib",
+      "type": "number",
+      "tags": [
+        "sbi:i:mappable",
+        "uatu:measure",
+        "uatu:aggregable"
+      ],
+      "aggregation": [
+        {
+          "type": "last",
+          "target": "everpix:storage_tib:last"
+        }
+      ]
+    },
+    {
+      "column": "everpix:storage_tib:last",
+      "type": "number",
+      "tags": [
+        "uatu:measure",
+        "uatu:aggregate",
+        "uatu:aggregate:long",
+        "uatu:aggregate:point"
+      ]
+    },
+    {
+      "column": "everpix:sub_rate",
+      "type": "number",
+      "tags": [
+        "sbi:i:mappable",
+        "uatu:measure",
+        "uatu:aggregable"
+      ],
+      "aggregation": [
+        {
+          "type": "avg",
+          "target": "everpix:sub_rate:avg"
+        }
+      ]
+    },
+    {
+      "column": "everpix:sub_rate:avg",
+      "type": "number",
+      "tags": [
+        "uatu:measure",
+        "uatu:aggregate"
+      ]
+    },
+    {
+      "column": "everpix:sub_rate_1k",
+      "type": "number",
+      "tags": [
+        "sbi:i:mappable",
+        "uatu:measure",
+        "uatu:aggregable"
+      ],
+      "aggregation": [
+        {
+          "type": "avg",
+          "target": "everpix:sub_rate_1k:avg"
+        }
+      ]
+    },
+    {
+      "column": "everpix:sub_rate_1k:avg",
+      "type": "number",
+      "tags": [
+        "uatu:measure",
+        "uatu:aggregate"
+      ]
+    },
+    {
+      "column": "everpix:sub_rate_10k",
+      "type": "number",
+      "tags": [
+        "sbi:i:mappable",
+        "uatu:measure",
+        "uatu:aggregable"
+      ],
+      "aggregation": [
+        {
+          "type": "avg",
+          "target": "everpix:sub_rate_10k:avg"
+        }
+      ]
+    },
+    {
+      "column": "everpix:sub_rate_10k:avg",
+      "type": "number",
+      "tags": [
+        "uatu:measure",
+        "uatu:aggregate"
+      ]
+    },
+    {
+      "column": "everpix:free_active",
+      "type": "number",
+      "tags": [
+        "sbi:i:mappable",
+        "uatu:measure",
+        "uatu:aggregable"
+      ],
+      "aggregation": [
+        {
+          "type": "avg",
+          "target": "everpix:free_active:avg"
+        }
+      ]
+    },
+    {
+      "column": "everpix:free_active:avg",
+      "type": "number",
+      "tags": [
+        "uatu:measure",
+        "uatu:aggregate"
+      ]
+    },
+    {
+      "column": "everpix:sub_active",
+      "type": "number",
+      "tags": [
+        "sbi:i:mappable",
+        "uatu:measure",
+        "uatu:aggregable"
+      ],
+      "aggregation": [
+        {
+          "type": "avg",
+          "target": "everpix:sub_active:avg"
+        }
+      ]
+    },
+    {
+      "column": "everpix:sub_active:avg",
+      "type": "number",
+      "tags": [
+        "uatu:measure",
+        "uatu:aggregate"
+      ]
+    },
+    {
+      "column": "everpix:calc:margin_accrual",
+      "type": "number:currency",
+      "tags": [
+        "uatu:measure",
+        "uatu:aggregable"
+      ],
+      "aggregation": [
+        {
+          "type": "sum",
+          "target": "everpix:calc:margin_accrual:sum"
+        }
+      ]
+    },
+    {
+      "column": "everpix:calc:margin_accrual:sum",
+      "type": "number:currency",
+      "tags": [
+        "uatu:measure",
+        "uatu:aggregate",
+        "uatu:aggregate:long",
+        "uatu:aggregate:point"
+      ]
+    },
+    {
+      "column": "everpix:calc:margin_cash",
+      "type": "number:currency",
+      "tags": [
+        "uatu:measure",
+        "uatu:aggregable"
+      ],
+      "aggregation": [
+        {
+          "type": "sum",
+          "target": "everpix:calc:margin_cash:sum"
+        }
+      ]
+    },
+    {
+      "column": "everpix:calc:margin_cash:sum",
+      "type": "number:currency",
+      "tags": [
+        "uatu:measure",
+        "uatu:aggregate",
+        "uatu:aggregate:long",
+        "uatu:aggregate:point"
+      ]
+    },
+    {
+      "column": "everpix:calc:deferred",
+      "type": "number:currency",
+      "tags": [
+        "uatu:measure",
+        "uatu:aggregable"
+      ],
+      "aggregation": [
+        {
+          "type": "sum",
+          "target": "everpix:calc:deferred:sum"
+        }
+      ]
+    },
+    {
+      "column": "everpix:calc:deferred:sum",
+      "type": "number:currency",
+      "tags": [
+        "uatu:measure",
+        "uatu:aggregate"
+      ]
+    },
+    {
+      "column": "everpix:calc:cum_recognized",
+      "type": "number:currency",
+      "tags": [
+        "uatu:measure",
+        "uatu:aggregate",
+        "uatu:aggregate:long"
+      ]
+    },
+    {
+      "column": "everpix:calc:cum_aws",
+      "type": "number:currency",
+      "tags": [
+        "uatu:measure",
+        "uatu:aggregate",
+        "uatu:aggregate:long"
+      ]
+    },
+    {
+      "column": "everpix:calc:cum_margin",
+      "type": "number:currency",
+      "tags": [
+        "uatu:measure",
+        "uatu:aggregate",
+        "uatu:aggregate:long",
+        "uatu:aggregate:change"
+      ]
+    },
+    {
+      "column": "everpix:calc:cum_deferred",
+      "type": "number:currency",
+      "tags": [
+        "uatu:measure",
+        "uatu:aggregate",
+        "uatu:aggregate:long"
+      ]
+    }
+  ]
+}

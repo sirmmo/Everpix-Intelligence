@@ -1,0 +1,75 @@
+{
+  "type": "mapping",
+  "version": "1",
+  "name": "everpix",
+  "columns": [
+    {
+      "column": "id",
+      "target": "id"
+    },
+    {
+      "column": "Month",
+      "target": "uatu:date"
+    },
+    {
+      "column": "Users",
+      "target": "everpix:users"
+    },
+    {
+      "column": "Subscribers",
+      "target": "everpix:subscribers"
+    },
+    {
+      "column": "New Users",
+      "target": "everpix:new_users"
+    },
+    {
+      "column": "Cash Sales",
+      "target": "everpix:cash_sales"
+    },
+    {
+      "column": "Recognized Revenue",
+      "target": "everpix:recognized_revenue"
+    },
+    {
+      "column": "AWS Cost",
+      "target": "everpix:aws_cost"
+    },
+    {
+      "column": "Storage TiB",
+      "target": "everpix:storage_tib"
+    },
+    {
+      "column": "New Photos",
+      "target": "everpix:new_photos"
+    },
+    {
+      "column": "Subscription Rate",
+      "target": "everpix:sub_rate"
+    },
+    {
+      "column": "Subscription Rate 1k",
+      "target": "everpix:sub_rate_1k"
+    },
+    {
+      "column": "Subscription Rate 10k",
+      "target": "everpix:sub_rate_10k"
+    },
+    {
+      "column": "Free Active 30d",
+      "target": "everpix:free_active"
+    },
+    {
+      "column": "Subscribers Active 30d",
+      "target": "everpix:sub_active"
+    },
+    {
+      "column": "Website Visits",
+      "target": "everpix:visits"
+    },
+    {
+      "column": "Press Articles",
+      "target": "everpix:press"
+    }
+  ]
+}

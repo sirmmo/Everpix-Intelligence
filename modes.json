@@ -1,0 +1,17 @@
+[
+  {
+    "type": "button",
+    "id": "long",
+    "labelKey": "modes.long",
+    "icon": "chart-timeline-variant"
+  },
+  {
+    "type": "divider"
+  },
+  {
+    "type": "button",
+    "id": "point",
+    "labelKey": "modes.point",
+    "icon": "chart-bubble"
+  }
+]

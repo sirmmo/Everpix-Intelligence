@@ -26,6 +26,46 @@ The following high-level metrics are from September 2012, when we started sellin
 
 *Retained users: users who used the Web, iOS, Mac, Windows Everpix apps or opened a Flashback email.*
 
+Live Dashboard
+--------------
+
+This repo doubles as a [GestaltBI](https://github.com/GestaltBI) config repo. The client renders it straight from GitHub over jsDelivr — no build, no backend:
+
+> https://gestaltbi.github.io/gestaltbi-core/gh/sirmmo/everpix-intelligence
+
+Pin a commit, tag or branch by appending a ref:
+
+> https://gestaltbi.github.io/gestaltbi-core/gh/sirmmo/everpix-intelligence/<ref>
+
+### The config bundle
+
+Six files at the repo root drive it. All six are generated — do not hand-edit them:
+
+```sh
+node tools/build-gestaltbi-config.mjs
+```
+
+| File | What it holds |
+|------|---------------|
+| `data.csv` | 14 monthly rows, Sep 2012 – Oct 2013, built from the KPI series in `Internal Metrics/` and `External Metrics/` |
+| `mapping.json` | Maps the human CSV headers onto canonical codes (`Month` → `uatu:date`, `AWS Cost` → `everpix:aws_cost`, …) |
+| `structure.json` | Column types, tags and aggregation rules |
+| `processing.json` | The process graph: format → filter → derive margins → aggregate by month → cumulate |
+| `modes.json` | The analysis modes the sidebar offers |
+| `it.json` | Column labels |
+
+### What the dashboard shows
+
+The monthly grain carries the whole business: cash sales against revenue recognized on an accrual basis, AWS production cost, gross margin on both bases, the deferred-revenue balance, users, subscribers, storage under management, conversion and retention rates, website traffic and press volume.
+
+The two bases are the point. Everpix sold annual plans — 71% of all subscriptions — so cash landed a year ahead of the service it paid for. In October 2013 the cash margin over AWS reads **+$10,629** and the accrual margin reads **-$4,648**. Recognized revenue never covered AWS in any of the thirteen measured months, and the deferred-revenue balance had reached **$126,681** by the shutdown announcement.
+
+### Notes
+
+* **Only `long` and `point` modes are exposed.** The synchronic and change-force modes rank or decompose across non-time dimensions — customer, product, region — which a monthly platform time-series does not have. Map views render empty: there is no geography in this dataset.
+* **Numbers use a comma decimal separator and no thousands separator.** The client parses cells with an Italian reader, so `24918,25` is correct and `24918.25` would be read as 2491825.
+* September 2012 has no AWS figure, so its margins are blank rather than equal to revenue.
+
 Complete Dataset
 ----------------
 
