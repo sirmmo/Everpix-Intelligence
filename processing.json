@@ -185,12 +185,15 @@
     "conf_pointgraph": {
       "op": "noop",
       "options": {
-        "name": "",
+        "name": "pointgraph",
         "prefixes": [
           "pointA",
           "pointB"
         ],
         "revenue": "everpix:calc:cum_recognized",
+        "fixedMeasureA": "everpix:cash_sales:sum",
+        "fixedMeasureB": "everpix:aws_cost:sum",
+        "fixedMeasureC": "everpix:calc:margin_accrual:sum",
         "rows": []
       }
     },

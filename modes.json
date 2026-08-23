@@ -13,5 +13,26 @@
     "id": "point",
     "labelKey": "modes.point",
     "icon": "chart-bubble"
+  },
+  {
+    "type": "divider"
+  },
+  {
+    "type": "button",
+    "id": "pivot",
+    "labelKey": "modes.pivot",
+    "icon": "table-large"
+  },
+  {
+    "type": "button",
+    "id": "correlate",
+    "labelKey": "modes.correlate",
+    "icon": "chart-scatter-plot"
+  },
+  {
+    "type": "button",
+    "id": "narrative",
+    "labelKey": "modes.narrative",
+    "icon": "book-open-page-variant"
   }
 ]
