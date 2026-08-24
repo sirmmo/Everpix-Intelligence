@@ -265,11 +265,22 @@ const processing = { type: 'processing', version: '1', name: 'everpix', process:
 // Only the modes this dataset can actually answer. `sync`, `longdiff` and
 // `longchange` rank or decompose across non-time dimensions (customer,
 // product, region) that a monthly platform time-series does not have.
-const modes = [
-  { type: 'button', id: 'long', labelKey: 'modes.long', icon: 'chart-timeline-variant' },
-  { type: 'divider' },
-  { type: 'button', id: 'point', labelKey: 'modes.point', icon: 'chart-bubble' },
-];
+// This dataset has exactly one dimension — the month — and no column anywhere
+// carries a coordinate, so `map` has nothing it could draw. Excluding it is not
+// cosmetic: `long` is the first mode, so without this the config opens on an
+// empty map of nowhere.
+const modes = {
+  exclude: ['map'],
+  modes: [
+    { type: 'button', id: 'long', labelKey: 'modes.long', icon: 'chart-timeline-variant' },
+    { type: 'divider' },
+    { type: 'button', id: 'point', labelKey: 'modes.point', icon: 'chart-bubble' },
+    { type: 'divider' },
+    { type: 'button', id: 'pivot', labelKey: 'modes.pivot', icon: 'table-large' },
+    { type: 'button', id: 'correlate', labelKey: 'modes.correlate', icon: 'chart-scatter-plot' },
+    { type: 'button', id: 'narrative', labelKey: 'modes.narrative', icon: 'book-open-page-variant' },
+  ],
+};
 
 // --- it.json (column labels) -------------------------------------------------
 const L = {

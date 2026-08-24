@@ -62,7 +62,16 @@ The two bases are the point. Everpix sold annual plans — 71% of all subscripti
 
 ### Notes
 
-* **Only `long` and `point` modes are exposed.** The synchronic and change-force modes rank or decompose across non-time dimensions — customer, product, region — which a monthly platform time-series does not have. Map views render empty: there is no geography in this dataset.
+* **The synchronic and change-force modes are not exposed.** They rank or decompose across non-time dimensions — customer, product, region — which a monthly platform time-series does not have. What is exposed is `long`, `point`, `pivot`, `correlate` and the narrative.
+* **`map` is excluded outright**, in `modes.json`:
+
+  ```json
+  { "exclude": ["map"], "modes": [ … ] }
+  ```
+
+  The map views plot a GeoJSON built from columns tagged `gcx:lat` / `gcx:lon`, and this dataset has no geography at all. Without the exclusion `long` is still the first mode, so the config opened on an empty map of nowhere; with it, the Map button is gone and `/data` lands on the chart instead.
+* **The story is hand-written**, in `story.json` — the builder does not generate it, so re-running the builder leaves it alone. Two of its checks fail on purpose: revenue never covered AWS, and the accrual margin was never positive. A report that cannot be contradicted by its own numbers is a brochure.
+* **The advisor needs no configuration.** It registers itself as a tool and appears under its own heading in the sidebar whether or not `modes.json` mentions it.
 * **Numbers use a comma decimal separator and no thousands separator.** The client parses cells with an Italian reader, so `24918,25` is correct and `24918.25` would be read as 2491825.
 * September 2012 has no AWS figure, so its margins are blank rather than equal to revenue.
 
